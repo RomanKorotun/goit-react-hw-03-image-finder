@@ -4,6 +4,8 @@ import { serviceSearch } from 'api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
+import { Error } from './Error';
+import { Layout } from './Layout';
 
 export class App extends React.Component {
   state = {
@@ -60,9 +62,10 @@ export class App extends React.Component {
     const { galleryItems } = this.state;
     const currentHitsCounter = this.hitsCounter(galleryItems.length);
     return (
-      <React.Fragment>
+      <Layout>
         <SearchBar onSubmit={this.handlerSubmit} />
         {this.state.loading && <Loader />}
+        {this.state.error && <Error>Error! Try reloading the page...</Error>}
         {this.state.galleryItems.length > 0 && (
           <ImageGallery galleryItems={galleryItems} />
         )}
@@ -70,7 +73,7 @@ export class App extends React.Component {
           currentHitsCounter < this.state.totalHitsCounter && (
             <Button onLoadMore={this.handlerLoadMore} />
           )}
-      </React.Fragment>
+      </Layout>
     );
   }
 }
