@@ -9,12 +9,11 @@ export const LoadMoreBtn = styled.button`
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  /* margin-bottom: 10px; */
-
-  transition: box-shadow 250ms, background-color 250ms;
+  transition: box-shadow 250ms, background-color 250ms, transform 250ms;
   &:hover,
   :focus {
     box-shadow: 1px 1px 5px black;
     background-color: royalblue;
+    transform: scale(1.03);
   }
 `;
