@@ -17,6 +17,7 @@ export const ModalContainer = ({
   isOpenModalOpen,
   onCloseModal,
   largeImageURL,
+  tags,
 }) => {
   return (
     <Modal
@@ -25,7 +26,7 @@ export const ModalContainer = ({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <img src={largeImageURL} alt="" width="850" height="526"></img>
+      <img src={largeImageURL} alt={tags} width="850" height="526"></img>
     </Modal>
   );
 };

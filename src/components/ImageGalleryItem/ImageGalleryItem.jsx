@@ -34,22 +34,23 @@ export class ImageGalleryItem extends React.Component {
   };
 
   render() {
-    const { webformatURL, largeImageURL } = this.props;
+    const { webformatURL, largeImageURL, tags } = this.props;
     const { isModalOpen } = this.state;
     return (
       <PhotoCard>
         <img
           onClick={this.openModal}
           src={webformatURL}
-          alt=""
+          alt={tags}
           loading="lazy"
           width="334"
           height="270"
-        ></img>
+        />
         <ModalContainer
           largeImageURL={largeImageURL}
           isOpenModalOpen={isModalOpen}
           onCloseModal={this.closeModal}
+          tags={tags}
         />
       </PhotoCard>
     );
