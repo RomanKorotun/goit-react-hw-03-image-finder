@@ -34,10 +34,10 @@ export class ImageGalleryItem extends React.Component {
   };
 
   render() {
-    const { webformatURL } = this.props;
+    const { webformatURL, largeImageURL } = this.props;
     const { isModalOpen } = this.state;
     return (
-      <PhotoCard onClick={this.openModal}>
+      <PhotoCard>
         <img
           onClick={this.openModal}
           src={webformatURL}
@@ -47,6 +47,7 @@ export class ImageGalleryItem extends React.Component {
           height="270"
         ></img>
         <ModalContainer
+          largeImageURL={largeImageURL}
           isOpenModalOpen={isModalOpen}
           onCloseModal={this.closeModal}
         />

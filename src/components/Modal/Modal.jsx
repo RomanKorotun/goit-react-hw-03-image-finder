@@ -7,13 +7,17 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -42%)',
   },
 };
 
 Modal.setAppElement('#root');
 
-export const ModalContainer = ({ isOpenModalOpen, onCloseModal }) => {
+export const ModalContainer = ({
+  isOpenModalOpen,
+  onCloseModal,
+  largeImageURL,
+}) => {
   return (
     <Modal
       isOpen={isOpenModalOpen}
@@ -21,7 +25,7 @@ export const ModalContainer = ({ isOpenModalOpen, onCloseModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <p>I am Modal</p>
+      <img src={largeImageURL} alt="" width="850" height="526"></img>
     </Modal>
   );
 };
