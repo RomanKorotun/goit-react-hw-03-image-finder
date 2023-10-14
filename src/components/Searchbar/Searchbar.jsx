@@ -8,6 +8,7 @@ export const SearchBar = ({ onSubmit }) => {
           evt.preventDefault();
           const { searchQuery } = evt.target.elements;
           onSubmit(searchQuery.value);
+          evt.target.reset();
         }}
       >
         <SearchFormInput
