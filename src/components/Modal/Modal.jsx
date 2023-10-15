@@ -14,14 +14,14 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const ModalContainer = ({
-  isOpenModalOpen,
+  isModalOpen,
   onCloseModal,
   largeImageURL,
   tags,
 }) => {
   return (
     <Modal
-      isOpen={isOpenModalOpen}
+      isOpen={isModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       contentLabel="Example Modal"

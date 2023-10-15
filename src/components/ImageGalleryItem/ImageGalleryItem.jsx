@@ -2,20 +2,6 @@ import React from 'react';
 import { PhotoCard } from './ImageGalleryItem.styled';
 import { ModalContainer } from 'components/Modal/Modal';
 
-// export const ImageGalleryItem = ({ webformatURL }) => {
-//   return (
-//     <PhotoCard>
-//       <img
-//         src={webformatURL}
-//         alt=""
-//         loading="lazy"
-//         width="334"
-//         height="270"
-//       ></img>
-//     </PhotoCard>
-//   );
-// };
-
 export class ImageGalleryItem extends React.Component {
   state = {
     isModalOpen: false,
@@ -48,7 +34,7 @@ export class ImageGalleryItem extends React.Component {
         />
         <ModalContainer
           largeImageURL={largeImageURL}
-          isOpenModalOpen={isModalOpen}
+          isModalOpen={isModalOpen}
           onCloseModal={this.closeModal}
           tags={tags}
         />

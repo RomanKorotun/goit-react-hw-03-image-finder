@@ -15,7 +15,8 @@ export class App extends React.Component {
     galleryItems: [],
     loading: false,
     error: false,
-    totalHitsCounter: 0,
+    isEmpty: false,
+    showLoadMode: false,
   };
 
   handlerSubmit = inputValue => {
@@ -23,6 +24,7 @@ export class App extends React.Component {
       query: inputValue,
       page: 1,
       galleryItems: [],
+      showLoadMode: false,
     });
   };
 
@@ -33,12 +35,23 @@ export class App extends React.Component {
     ) {
       try {
         const { page, query } = this.state;
-        this.setState({ loading: true, error: false });
+        this.setState({
+          loading: true,
+          error: false,
+          isEmpty: false,
+        });
+
         const data = await serviceSearch(page, query);
-        console.log(data);
+
+        if (data.hits.length === 0) {
+          this.setState({
+            isEmpty: true,
+          });
+        }
+
         this.setState(prevState => ({
           galleryItems: [...prevState.galleryItems, ...data.hits],
-          totalHitsCounter: data.totalHits,
+          showLoadMode: page < Math.ceil(data.totalHits / 12),
         }));
       } catch (error) {
         this.setState({ error: true });
@@ -54,32 +67,21 @@ export class App extends React.Component {
     }));
   };
 
-  hitsCounter = lengthItems => {
-    let count = 0;
-    return count + lengthItems;
-  };
-
   render() {
-    const { query, galleryItems, loading, error, totalHitsCounter } =
-      this.state;
-    const currentHitsCounter = this.hitsCounter(galleryItems.length);
+    const { galleryItems, loading, error, isEmpty, showLoadMode } = this.state;
+
     return (
       <Layout>
         <SearchBar onSubmit={this.handlerSubmit} />
         {loading && <Loader />}
         {error && <Error>Error! Try reloading the page...</Error>}
-        {query !== '' &&
-          loading === false &&
-          error === false &&
-          galleryItems.length === 0 && (
-            <Error>Your search did not match anything. Please try again.</Error>
-          )}
+        {isEmpty && (
+          <Error>Your search did not match anything. Please try again.</Error>
+        )}
         {galleryItems.length > 0 && (
           <ImageGallery galleryItems={galleryItems} />
         )}
-        {currentHitsCounter > 0 && currentHitsCounter < totalHitsCounter && (
-          <Button onLoadMore={this.handlerLoadMore} />
-        )}
+        {showLoadMode && <Button onLoadMore={this.handlerLoadMore} />}
       </Layout>
     );
   }
