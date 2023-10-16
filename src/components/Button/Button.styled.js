@@ -9,6 +9,7 @@ export const LoadMoreBtn = styled.button`
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
+  margin-top: 20px;
   transition: box-shadow 250ms, background-color 250ms, transform 250ms;
   &:hover,
   :focus {

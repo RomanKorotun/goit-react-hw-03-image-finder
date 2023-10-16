@@ -7,7 +7,7 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -42%)',
+    transform: 'translate(-50%, -46%)',
   },
 };
 
@@ -26,7 +26,7 @@ export const ModalContainer = ({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <img src={largeImageURL} alt={tags} width="850" height="526"></img>
+      <img src={largeImageURL} alt={tags} width="860" height="560"></img>
     </Modal>
   );
 };

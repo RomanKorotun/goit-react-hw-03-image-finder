@@ -6,8 +6,8 @@ export const SearchForm = styled.form`
   background-image: linear-gradient(#00f, #ff0);
   justify-content: center;
   gap: 2px;
-  padding-top: 26px;
-  padding-bottom: 26px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   display: flex;
   position: fixed;
   top: 0;
