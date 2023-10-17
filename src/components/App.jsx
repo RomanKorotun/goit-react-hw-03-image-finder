@@ -4,8 +4,7 @@ import { serviceSearch } from 'api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
-
-import { Error } from './Error';
+import { Error, Info } from './Message';
 import { Layout } from './Layout';
 
 export class App extends React.Component {
@@ -73,15 +72,16 @@ export class App extends React.Component {
     return (
       <Layout>
         <SearchBar onSubmit={this.handlerSubmit} />
-        {loading && <Loader />}
+
         {error && <Error>Error! Try reloading the page...</Error>}
         {isEmpty && (
-          <Error>Your search did not match anything. Please try again.</Error>
+          <Info>Your search did not match anything. Please try again.</Info>
         )}
         {galleryItems.length > 0 && (
           <ImageGallery galleryItems={galleryItems} />
         )}
-        {showLoadMode && <Button onLoadMore={this.handlerLoadMore} />}
+        {(loading && <Loader />) ||
+          (showLoadMode && <Button onLoadMore={this.handlerLoadMore} />)}
       </Layout>
     );
   }
