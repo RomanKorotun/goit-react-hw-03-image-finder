@@ -1,4 +1,5 @@
 import React from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { SearchBar } from './Searchbar/Searchbar';
 import { serviceSearch } from 'api';
 import { ImageGallery } from './ImageGallery/ImageGallery';
@@ -42,6 +43,14 @@ export class App extends React.Component {
 
         const data = await serviceSearch(page, query);
 
+        if (page === 1 && data.totalHits > 1) {
+          toast.success(`Hooray! We found ${data.totalHits} images!`);
+        }
+
+        if (page >= Math.ceil(data.totalHits / 12)) {
+          toast("We're sorry, but you've reached the end of search results.");
+        }
+
         if (data.hits.length === 0) {
           this.setState({
             isEmpty: true,
@@ -72,7 +81,6 @@ export class App extends React.Component {
     return (
       <Layout>
         <SearchBar onSubmit={this.handlerSubmit} />
-
         {error && <Error>Error! Try reloading the page...</Error>}
         {isEmpty && (
           <Info>Your search did not match anything. Please try again.</Info>
@@ -82,6 +90,15 @@ export class App extends React.Component {
         )}
         {(loading && <Loader />) ||
           (showLoadMode && <Button onLoadMore={this.handlerLoadMore} />)}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+          }}
+        />
       </Layout>
     );
   }
