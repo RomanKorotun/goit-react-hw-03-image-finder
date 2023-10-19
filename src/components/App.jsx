@@ -42,12 +42,13 @@ export class App extends React.Component {
         });
 
         const data = await serviceSearch(page, query);
+        console.log(data);
 
         if (page === 1 && data.totalHits > 1) {
           toast.success(`Hooray! We found ${data.totalHits} images!`);
         }
 
-        if (page >= Math.ceil(data.totalHits / 12)) {
+        if (page >= Math.ceil(data.totalHits / 12) && data.totalHits !== 0) {
           toast("We're sorry, but you've reached the end of search results.");
         }
 
