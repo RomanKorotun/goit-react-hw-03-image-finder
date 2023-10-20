@@ -7,16 +7,10 @@ export class ImageGalleryItem extends React.Component {
     isModalOpen: false,
   };
 
-  openModal = () => {
-    this.setState({
-      isModalOpen: true,
-    });
-  };
-
-  closeModal = () => {
-    this.setState({
-      isModalOpen: false,
-    });
+  toggleModal = () => {
+    this.setState(prevState => ({
+      isModalOpen: !prevState.isModalOpen,
+    }));
   };
 
   render() {
@@ -25,7 +19,7 @@ export class ImageGalleryItem extends React.Component {
     return (
       <PhotoCard>
         <img
-          onClick={this.openModal}
+          onClick={this.toggleModal}
           src={webformatURL}
           alt={tags}
           loading="lazy"
@@ -35,7 +29,7 @@ export class ImageGalleryItem extends React.Component {
         <ModalContainer
           largeImageURL={largeImageURL}
           isModalOpen={isModalOpen}
-          onCloseModal={this.closeModal}
+          onCloseModal={this.toggleModal}
           tags={tags}
         />
       </PhotoCard>
